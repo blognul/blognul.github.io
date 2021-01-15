@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="离线鱼" /><meta name="description" content="Hugo theme even example site." /><meta name="keywords" content="Hugo, theme, even" />
+<meta name="author" content="离线鱼" /><meta name="description" content="离线鱼的博客" /><meta name="keywords" content="离线鱼, Blog, Hugo, theme, even, 计算机, 技术, 渗透, 编程" />
 
 
 
@@ -42,15 +42,15 @@
 
 
 <meta property="og:title" content="离线鱼的博客" />
-<meta property="og:description" content="Hugo theme even example site." />
+<meta property="og:description" content="离线鱼的博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://blognul.github.io/" />
-<meta property="og:updated_time" content="2021-01-15T09:57:40-05:00" />
+
 <meta itemprop="name" content="离线鱼的博客">
-<meta itemprop="description" content="Hugo theme even example site.">
+<meta itemprop="description" content="离线鱼的博客">
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="离线鱼的博客"/>
-<meta name="twitter:description" content="Hugo theme even example site."/>
+<meta name="twitter:description" content="离线鱼的博客"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -111,52 +111,6 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/test-yas/">测试模板补全等等功能</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-01-15 </span>
-      <div class="post-category">
-          <a href="/categories/hugo/"> HUGO </a>
-          </div>
-        <span class="more-meta"> 约 44 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>Hello!</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/test-yas/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/first-blog-for-ox-hugo/">测试的Hugo使用</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2021-01-15 </span>
-      <div class="post-category">
-          <a href="/categories/hugo/"> HUGO </a>
-          </div>
-        <span class="more-meta"> 约 83 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      这是第一篇使用的测试记录,我去，突然间好了。。。不知道为啥，日了,youbuxingle,为啥代码段又用不了了？？？？sdfsdfsdfsd
-    </div>
-    <div class="read-more">
-      <a href="/post/first-blog-for-ox-hugo/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -171,7 +125,7 @@
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="https://github.com/blognul" class="iconfont icon-github" title="github"></a>
   <a href="https://blognul.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
@@ -193,7 +147,6 @@
 
   <span class="copyright-year">
     &copy; 
-    2017 - 
     2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>离线鱼</span>
   </span>
 </div>
@@ -208,6 +161,13 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 
