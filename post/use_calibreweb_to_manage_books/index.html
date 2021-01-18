@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Emacs写博客的工作流程 - 离线鱼的博客</title>
+  <title>使用Calibre-Web管理你的图书 - 离线鱼的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="离线鱼" /><meta name="description" content="简单总结一下自己使用Emacs写博客的工作流程，方便初学者进行配置使用
+<meta name="author" content="离线鱼" /><meta name="description" content="使用Calibre-Web更好的在线管理你的图书
 " /><meta name="keywords" content="离线鱼, Blog, Hugo, theme, even, 计算机, 技术, 渗透, 编程" />
 
 
@@ -27,7 +27,7 @@
 <meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
-<link rel="canonical" href="https://blognul.github.io/post/emacs_blogging_workflow/" />
+<link rel="canonical" href="https://blognul.github.io/post/use_calibreweb_to_manage_books/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,23 +40,23 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Emacs写博客的工作流程" />
-<meta property="og:description" content="简单总结一下自己使用Emacs写博客的工作流程，方便初学者进行配置使用" />
+<meta property="og:title" content="使用Calibre-Web管理你的图书" />
+<meta property="og:description" content="使用Calibre-Web更好的在线管理你的图书" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blognul.github.io/post/emacs_blogging_workflow/" />
-<meta property="article:published_time" content="2021-01-15T14:19:31-05:00" />
-<meta property="article:modified_time" content="2021-01-15T14:19:31-05:00" />
-<meta itemprop="name" content="Emacs写博客的工作流程">
-<meta itemprop="description" content="简单总结一下自己使用Emacs写博客的工作流程，方便初学者进行配置使用">
-<meta itemprop="dateModified" content="2021-01-15T14:19:31-05:00" />
-<meta itemprop="wordCount" content="759">
+<meta property="og:url" content="https://blognul.github.io/post/use_calibreweb_to_manage_books/" />
+<meta property="article:published_time" content="2021-01-16T01:25:45-05:00" />
+<meta property="article:modified_time" content="2021-01-16T01:25:45-05:00" />
+<meta itemprop="name" content="使用Calibre-Web管理你的图书">
+<meta itemprop="description" content="使用Calibre-Web更好的在线管理你的图书">
+<meta itemprop="dateModified" content="2021-01-16T01:25:45-05:00" />
+<meta itemprop="wordCount" content="860">
 
 
 
-<meta itemprop="keywords" content="emacs,blog,hugo," />
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Emacs写博客的工作流程"/>
-<meta name="twitter:description" content="简单总结一下自己使用Emacs写博客的工作流程，方便初学者进行配置使用"/>
+<meta name="twitter:title" content="使用Calibre-Web管理你的图书"/>
+<meta name="twitter:description" content="使用Calibre-Web更好的在线管理你的图书"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -119,14 +119,14 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Emacs写博客的工作流程</h1>
+      <h1 class="post-title">使用Calibre-Web管理你的图书</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 2021-01-15 </span>
+        <span class="post-time"> 2021-01-16 </span>
         <div class="post-category">
-            <a href="/categories/emacs/"> Emacs </a>
+            <a href="/categories/server/"> server </a>
             </div>
-          <span class="more-meta"> 约 759 字 </span>
+          <span class="more-meta"> 约 860 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
       </div>
@@ -135,148 +135,92 @@
     <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#插件配置">插件配置</a>
-          <ul>
-            <li><a href="#ox-hugo">ox-hugo</a></li>
-            <li><a href="#easy-hugo">easy-hugo</a></li>
-            <li><a href="#yasnippet">Yasnippet</a></li>
-          </ul>
-        </li>
-        <li><a href="#github-actions">Github Actions</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+    <nav id="TableOfContents"></nav>
   </div>
 </div>
     <div class="post-content">
-      <p>简单总结一下自己使用Emacs写博客的工作流程，方便初学者进行配置使用</p>
-<ul>
-<li>Emacs版本： Emacs27.1</li>
-<li>博客系统： Hugo</li>
-<li>ox-hugo</li>
-<li>eaxy-hugo</li>
-</ul>
-<h2 id="插件配置">插件配置</h2>
-<p>其实没什么需要配置的，按照官方的说明进行安装即可</p>
-<ul>
-<li>ox-hugo：<a href="https://ox-hugo.scripter.co/">https://ox-hugo.scripter.co/</a></li>
-<li>easy-hugo：<a href="https://github.com/masasam/emacs-easy-hugo">https://github.com/masasam/emacs-easy-hugo</a></li>
-</ul>
-<h3 id="ox-hugo">ox-hugo</h3>
+      <p>使用Calibre-Web更好的在线管理你的图书</p>
+<p>我是单独空出了一台老机器作为我的服务器使用，系统使用Ubuntu18，硬盘为4T东芝机械硬盘，后续还会作为简单的私有网盘使用</p>
+<p>项目地址：<a href="https://github.com/janeczku/calibre-web">https://github.com/janeczku/calibre-web</a></p>
+<p>可以参考项目的WIKI来使用docker进行搭建，这里我是直接搭建了</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">ox-hugo</span>
-  <span class="ss">:ensure</span> <span class="no">t</span>
-  <span class="ss">:after</span> <span class="nv">ox</span>
-  <span class="ss">:config</span>
-  <span class="p">(</span><span class="k">setq</span>
-   <span class="c1">;; 设置在文件导出到content下的哪个目录，我的这个是 content/post</span>
-   <span class="nv">org-hugo-section</span> <span class="s">&#34;post&#34;</span>
-   <span class="c1">;; 设置文章的最后修改时间为导出时间</span>
-   <span class="nv">org-hugo-auto-set-lastmod</span>	<span class="no">t</span>
-   <span class="p">)</span>
-  <span class="c1">;; 设置在org文件保存的时候自动导出到org-hugo-section下</span>
-  <span class="p">(</span><span class="nv">org-hugo-auto-export-mode</span><span class="p">))</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/janeczku/calibre-web
+
+<span class="nb">cd</span> calibre-web
+
+pip3 install --target vendor -r requirements.txt
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="easy-hugo">easy-hugo</h3>
+</div><p>这里几点需要注意吧，首先Ubuntu18是没有默认安装pip3的，并且在使用pip3安装的时候需要加system参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install python3-pip
+
+pip3 install --target vendor -r requirements.txt --system
+</code></pre></td></tr></table>
+</div>
+</div><p>此时，其实calibre-web服务已经可以启动，但是为了能够正常使用calibre-web还需要安装一些其他的程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 为了能够使calibre-web提取图书中的封面图片</span>
+sudo apt-get install imagemagick
+
+<span class="c1"># 为了初始化书库功能且支持转码功能</span>
+sudo apt-get install calibre
+</code></pre></td></tr></table>
+</div>
+</div><p>在启动calibre-web之前你需要先初始化一个书库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 建立书库</span>
+calibre --with-library<span class="o">=</span>/path/
+
+<span class="c1"># 添加书籍</span>
+calibre add book.name
+</code></pre></td></tr></table>
+</div>
+</div><p>可能在建立书库的时候会出现报错，可以暂且忽略，添加时没问题的，然后启动calibre-web</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">easy-hugo</span>
-  <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> calibre-web
+python3 cps.py
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="yasnippet">Yasnippet</h3>
-<p>Org文件的头部模板</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text"># -*- mode: snippet -*-
-# name: blogheader
-# key: blogheader
-# --
-#+HUGO_BASE_DIR: 你的hugo根目录
-#+HUGO_CATEGORIES: $0
-#+HUGO_AUTO_SET_LASTMOD: t
-#+TODO: TODO DONE
-#+options: author:nil
-
-
-$1
-</code></pre></td></tr></table>
-</div>
-</div><p>每一个二级子树均是一片文章，定义这篇文章的模板</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">  # name: 2blogname
-  # key: 2blogname
-  # --
-     :PROPERTIES:
-     :EXPORT_FILE_NAME: $0
-     :END:
-$1
-&lt;!--more--&gt;
-
-$2
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="github-actions">Github Actions</h2>
-<p>我是使用了2个github仓库，一个是 github pages 用于显示博客使用的 名字.github.io，另一个是存放hugo生成的站点文件的hugo_source</p>
-<p>使用ssh-keygen生成两组公私钥，一组用于提交hugo_source,另外一组用于hugo_source向github pages部署使用</p>
-<p>参考博客：</p>
-<ul>
-<li><a href="https://blue-bird1.github.io/posts/github-action-hugo/">https://blue-bird1.github.io/posts/github-action-hugo/</a></li>
-<li><a href="https://www.jianshu.com/p/5aa60433850a">https://www.jianshu.com/p/5aa60433850a</a></li>
-</ul>
-<p>使用的workflows文件</p>
+</div><p>此时访问8083端口即可看见配置界面，要求填入一个书库地址，就填写刚刚建立的书库即可</p>
+<p>应为界面可以调整成为中文，所以剩下的操作都比较简单，自行摸索即可</p>
+<p>需要注意的时，默认没有开启上传功能，你需要在 权限管理-&gt;编辑基本配置 中进行勾选，另外为了支持格式转换功能，需要在 编辑基本配置-&gt;拓展程序配置 中配置Calibre电子书转换器路径(使用 whereis ebook-convert 即可)，一般都是/usr/bin/ebook-convert吧。。</p>
+<p>接下来是将calibre-web创建成为服务运行</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -299,63 +243,31 @@ $2
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">name: CI
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># .service前的服务名字你可以自己定</span>
+sudo vim /etc/systemd/system/cps.service
 
-# Controls when the action will run.
-on:
-  push:
-    branches: [ master ]
+<span class="c1"># 内容</span>
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>Calibre-Web
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>simple
+<span class="nv">User</span><span class="o">=</span>root
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/python3 /calibre-web-path/cps.py
+<span class="nv">WorkingDirectory</span><span class="o">=</span>/calibre-web-path
 
-jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1  # v2 does not have submodules option now
-      with:
-  	submodules: true
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 
-      - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2
-      with:
-  	hugo-version: latest
-  	# extended: true
-
-      - name: Build
-      run: hugo
-
-      - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-  	deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-  	external_repository: xxx/xxx.github.io # Pages 远程仓库
-  	publish_dir: &#34;./public&#34;
-  	keep_files: false # remove existing files
-  	publish_branch: master
-  	commit_message: ${{ github.event.head_commit.message }}
+<span class="c1"># 启动服务</span>
+sudo systemctl start cps
+<span class="c1"># 开机启动</span>
+sudo systemctl <span class="nb">enable</span> cps
 </code></pre></td></tr></table>
 </div>
-</div><p>注意哦，如果你是使用子项目的方式下载的主题，一定要使用 submodules:true ，最开始看别人的博客没有注意，直接copy使用的，然后被坑了。。。事实证明干事不能不带脑子</p>
+</div><p>另外，calibre-web同时提供了OPDS服务，我使用IOS的kybook3程序对接OPDS，看书还是比较爽的，另外Kindle设备理所当然也是支持OPDS的，具体请自行使用</p>
     </div>
 
     <div class="post-copyright">
@@ -366,7 +278,7 @@ jobs:
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        2021-01-15
+        2021-01-16
         
     </span>
   </p>
@@ -374,18 +286,14 @@ jobs:
   
 </div>
 <footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/emacs/">emacs</a>
-          <a href="/tags/blog/">blog</a>
-          <a href="/tags/hugo/">hugo</a>
-          </div>
+      
       <nav class="post-nav">
-        <a class="prev" href="/post/use_calibreweb_to_manage_books/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">使用Calibre-Web管理你的图书</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
+        <a class="next" href="/post/emacs_blogging_workflow/">
+            <span class="next-text nav-default">Emacs写博客的工作流程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
       </nav>
     </footer>
   </article>
