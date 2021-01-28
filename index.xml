@@ -6,7 +6,16 @@
     <description>Recent content on 离线鱼的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 16 Jan 2021 01:25:45 -0500</lastBuildDate><atom:link href="https://blognul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Jan 2021 08:54:28 -0500</lastBuildDate><atom:link href="https://blognul.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tmux的基本使用</title>
+      <link>https://blognul.github.io/post/manual_for_tmux/</link>
+      <pubDate>Thu, 28 Jan 2021 08:54:28 -0500</pubDate>
+      
+      <guid>https://blognul.github.io/post/manual_for_tmux/</guid>
+      <description>&lt;p&gt;Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>使用Calibre-Web管理你的图书</title>
       <link>https://blognul.github.io/post/use_calibreweb_to_manage_books/</link>

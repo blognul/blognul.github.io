@@ -3,14 +3,35 @@
   
   <url>
     <loc>https://blognul.github.io/categories/</loc>
-    <lastmod>2021-01-16T01:25:45-05:00</lastmod>
+    <lastmod>2021-01-28T08:54:28-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://blognul.github.io/post/</loc>
-    <lastmod>2021-01-16T01:25:45-05:00</lastmod>
+    <lastmod>2021-01-28T08:54:28-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blognul.github.io/post/manual_for_tmux/</loc>
+    <lastmod>2021-01-28T08:54:28-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blognul.github.io/categories/tools/</loc>
+    <lastmod>2021-01-28T08:54:28-05:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blognul.github.io/</loc>
+    <lastmod>2021-01-28T08:54:28-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -24,13 +45,6 @@
   
   <url>
     <loc>https://blognul.github.io/post/use_calibreweb_to_manage_books/</loc>
-    <lastmod>2021-01-16T01:25:45-05:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blognul.github.io/</loc>
     <lastmod>2021-01-16T01:25:45-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

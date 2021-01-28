@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Tmux的基本使用 - 离线鱼的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="离线鱼" /><meta name="description" content="Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门
+" /><meta name="keywords" content="离线鱼, Blog, Hugo, theme, even, 计算机, 技术, 渗透, 编程" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
+
+
+<link rel="canonical" href="https://blognul.github.io/post/manual_for_tmux/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Tmux的基本使用" />
+<meta property="og:description" content="Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blognul.github.io/post/manual_for_tmux/" />
+<meta property="article:published_time" content="2021-01-28T08:54:28-05:00" />
+<meta property="article:modified_time" content="2021-01-28T08:54:28-05:00" />
+<meta itemprop="name" content="Tmux的基本使用">
+<meta itemprop="description" content="Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门">
+<meta itemprop="dateModified" content="2021-01-28T08:54:28-05:00" />
+<meta itemprop="wordCount" content="1874">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tmux的基本使用"/>
+<meta name="twitter:description" content="Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">离线鱼的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">离线鱼的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Tmux的基本使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-01-28 </span>
+        <div class="post-category">
+            <a href="/categories/tools/"> tools </a>
+            </div>
+          <span class="more-meta"> 约 1874 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#常用配置">常用配置</a>
+          <ul>
+            <li><a href="#配置tmux前缀键">配置tmux前缀键</a></li>
+            <li><a href="#修改新增面板的快捷键">修改新增面板的快捷键</a></li>
+            <li><a href="#开启鼠标支持">开启鼠标支持</a></li>
+            <li><a href="#使用hjkl切换面板">使用hjkl切换面板</a></li>
+            <li><a href="#使用hjkl调整面板大小">使用hjkl调整面板大小</a></li>
+            <li><a href="#tmux中的颜色">tmux中的颜色</a></li>
+            <li><a href="#其他的优化配置">其他的优化配置</a></li>
+          </ul>
+        </li>
+        <li><a href="#tpm-tmux的插件管理器安裝">TPM Tmux的插件管理器安裝</a></li>
+        <li><a href="#tmux插件">Tmux插件</a>
+          <ul>
+            <li><a href="#tmux-plugins-tmux-resurrect">tmux-plugins/tmux-resurrect</a></li>
+            <li><a href="#seebi-tmux-colors-solarized">seebi/tmux-colors-solarized</a></li>
+            <li><a href="#tmux-plugins-tmux-pain-control">tmux-plugins/tmux-pain-control</a></li>
+            <li><a href="#tmux-plugins-tmux-prefix-highlight">tmux-plugins/tmux-prefix-highlight</a></li>
+            <li><a href="#tmux-plugins-tmux-sensible">tmux-plugins/tmux-sensible</a></li>
+          </ul>
+        </li>
+        <li><a href="#常用快捷键">常用快捷键</a>
+          <ul>
+            <li><a href="#会话相关">会话相关</a></li>
+            <li><a href="#tmux中的操作-需要使用前缀">Tmux中的操作，需要使用前缀</a></li>
+            <li><a href="#会话">会话</a></li>
+            <li><a href="#窗口-标签页">窗口（标签页）</a></li>
+            <li><a href="#窗口-排序">窗口（排序）</a></li>
+            <li><a href="#窗格-分割">窗格（分割）</a></li>
+            <li><a href="#同步窗口">同步窗口</a></li>
+            <li><a href="#其他">其他</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Tmux是一款我非常喜欢的终端复用工具，本文章记录了简单的使用方法，便于自己记忆以及新手的入门</p>
+<p>如果使想方便使用的话，建议直接使用插件，然后其余的再进行配置的定制，之后我会附上我的tmux配置文件</p>
+<h2 id="常用配置">常用配置</h2>
+<p>感谢原作者的文章： <a href="http://louiszhai.github.io/2017/09/30/tmux/">http://louiszhai.github.io/2017/09/30/tmux/</a></p>
+<h3 id="配置tmux前缀键">配置tmux前缀键</h3>
+<p>在使用的时候确实会感觉C-b太不好按了，就是手要张开按，所以我也替换成了C-a</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g prefix C-a
+unbind C-b
+<span class="nb">bind</span> C-a send-prefix
+
+<span class="c1"># 配置第二个前缀</span>
+set-option -g prefix2 <span class="sb">`</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="修改新增面板的快捷键">修改新增面板的快捷键</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">unbind <span class="s1">&#39;&#34;&#39;</span>
+unbind %
+<span class="nb">bind</span> - splitw -v -c <span class="s1">&#39;#{pane_current_path}&#39;</span>
+<span class="nb">bind</span> <span class="p">|</span> splitw -h -c <span class="s1">&#39;#{pane_current_path}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="开启鼠标支持">开启鼠标支持</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">set-option -g mouse on
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用hjkl切换面板">使用hjkl切换面板</h3>
+<p>-r表示可以重复按键</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">bind</span> -r k <span class="k">select</span>-pane -U
+<span class="nb">bind</span> -r j <span class="k">select</span>-pane -D
+<span class="nb">bind</span> -r h <span class="k">select</span>-pane -L
+<span class="nb">bind</span> -r l <span class="k">select</span>-pane -R
+
+<span class="c1"># 选择最后一个面板</span>
+<span class="nb">bind</span> -r e lastp
+
+<span class="c1"># 选择最后一个窗口</span>
+<span class="nb">bind</span> -r ^e last
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="使用hjkl调整面板大小">使用hjkl调整面板大小</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">bind</span> -r ^j resizep -D <span class="m">5</span>
+<span class="nb">bind</span> -r ^k resizep -U <span class="m">5</span>
+<span class="nb">bind</span> -r ^h resizep -L <span class="m">5</span>
+<span class="nb">bind</span> -r ^l resizep -R <span class="m">5</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmux中的颜色">tmux中的颜色</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">alias</span> <span class="nv">tmux</span><span class="o">=</span><span class="s2">&#34;tmux -2&#34;</span>
+
+<span class="nb">set</span> -g default-terminal <span class="s2">&#34;screen-256color&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="其他的优化配置">其他的优化配置</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 设置窗口的开始序号</span>
+<span class="nb">set</span> -g base-index <span class="m">1</span>
+
+<span class="c1"># 设置面板的开始下标序号</span>
+<span class="nb">set</span> -g pane-base-index <span class="m">1</span>
+
+<span class="c1"># 状态栏定制</span>
+<span class="c1"># 状态栏支持UTF8</span>
+<span class="nb">set</span> -g status-utf8 on
+
+<span class="c1"># 状态栏刷新时间</span>
+<span class="nb">set</span> -g status-interval <span class="m">1</span>
+
+<span class="c1"># 设置状态栏列表左对齐</span>
+<span class="nb">set</span> -g status-justify left
+
+<span class="c1"># 非当前窗口有内容更新在状态栏通知</span>
+setw -g monitor-activity on
+
+<span class="c1"># 设置状态栏前景背景色</span>
+<span class="nb">set</span> -g status-style <span class="s2">&#34;bg=black,fg=yellow&#34;</span>
+
+<span class="c1"># 设置状态栏窗口名称格式</span>
+<span class="nb">set</span> -wg window-status-format <span class="s2">&#34; #I #W&#34;</span>
+
+<span class="c1"># 设置状态栏当前窗口名称格式</span>
+<span class="nb">set</span> -wg window-status-current-format <span class="s2">&#34; #I:#W#F&#34;</span>
+
+<span class="c1"># 设置状态栏窗口名称之间的间隔</span>
+<span class="nb">set</span> -wg window-status-separator <span class="s2">&#34;&#34;</span>
+
+<span class="c1"># 设置状态栏当前窗口的样式</span>
+<span class="nb">set</span> -wg window-status-current-style <span class="s2">&#34;bg=red&#34;</span>
+
+<span class="c1"># 设置消息通知的前景背景色</span>
+<span class="nb">set</span> -g message-style <span class="s2">&#34;bg=#202529,fg=#91A8BA&#34;</span>
+
+<span class="c1"># 启用活动警告</span>
+setw -g monitor-activity on
+<span class="nb">set</span> -g visual-activity on
+
+<span class="c1"># 居中窗口列表</span>
+<span class="nb">set</span> -g status-justify center
+
+<span class="c1"># 设置 PREFIX+Q 之后编号驻留的时间</span>
+<span class="nb">set</span> -g display-panes-time <span class="m">10000</span>
+
+<span class="c1"># 关闭某个窗口后，编号重排</span>
+<span class="nb">set</span> -g renumber-windows on
+
+<span class="c1"># 禁止活动进程修改窗口名</span>
+setw -g allow-rename off
+<span class="c1"># 禁止自动命名新窗口</span>
+setw -g automatic-rename off
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="tpm-tmux的插件管理器安裝">TPM Tmux的插件管理器安裝</h2>
+<ol>
+<li>clone整個TPM項目</li>
+</ol>
+<!--listend-->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>修改配置文件，使TMP生效</li>
+</ol>
+<!--listend-->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tpm&#39;</span>
+<span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-sensible&#39;</span>
+
+<span class="c1"># keep this line at the very bottom of tmux.conf</span>
+run <span class="s1">&#39;~/.tmux/plugins/tpm/tpm&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>tmux重載配置</li>
+</ol>
+<!--listend-->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">tmux <span class="nb">source</span> ~/.tmux.conf
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="tmux插件">Tmux插件</h2>
+<h3 id="tmux-plugins-tmux-resurrect">tmux-plugins/tmux-resurrect</h3>
+<p>能够保存tmux会话状态，包括面板布局等等</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-resurrect&#39;</span>
+<span class="nb">set</span> -g @resurrect-capture-pane-contents <span class="s1">&#39;on&#39;</span>
+<span class="nb">set</span> -g @resurrect-dir <span class="s1">&#39;~/.tmux/resurrect&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">PREFIX  C-s  <span class="c1"># 保存tmux状态</span>
+PREFIX  C-r  <span class="c1"># 回复tmux状态</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="seebi-tmux-colors-solarized">seebi/tmux-colors-solarized</h3>
+<p>一个tmux 256的配色方案</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;seebi/tmux-colors-solarized&#39;</span>
+
+<span class="c1"># 切换主题</span>
+<span class="nb">set</span> -g @colors-solarized <span class="s1">&#39;256&#39;</span>    <span class="c1"># default</span>
+<span class="nb">set</span> -g @colors-solarized <span class="s1">&#39;dark&#39;</span>
+<span class="nb">set</span> -g @colors-solarized <span class="s1">&#39;light&#39;</span>
+<span class="nb">set</span> -g @colors-solarized <span class="s1">&#39;base16&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmux-plugins-tmux-pain-control">tmux-plugins/tmux-pain-control</h3>
+<p>用于控制窗格的插件，安装这个插件，之前配置的切换窗口的就可以不全部使用了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-pain-control&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 切换panel</span>
+PREFIX + h  /  PREFIX + C-h
+PREFIX + j  /  PREFIX + C-j
+PREFIX + k  /  PREFIX + C-k
+PREFIX + l  /  PREFIX + C-l
+
+<span class="c1"># 调整窗口大小</span>
+PREFIX + SHIFT + h
+PREFIX + SHIFT + j
+PREFIX + SHIFT + k
+PREFIX + SHIFT + l
+
+
+<span class="c1"># 窗口分割</span>
+PREFIX + <span class="p">|</span>
+PREFIX + -
+
+
+<span class="c1"># 交换窗口</span>
+PREFIX + &lt;
+PREFIX + &gt;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmux-plugins-tmux-prefix-highlight">tmux-plugins/tmux-prefix-highlight</h3>
+<p>这个插件在按下前缀键后可以突出显示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-prefix-highlight&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果要使用需要配置状态栏</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g status-right <span class="s1">&#39;#{prefix_highlight} #H | %a %m-%d %H:%M&#39;</span>
+<span class="nb">set</span> -g @prefix_highlight_show_copy_mode <span class="s1">&#39;on&#39;</span>
+<span class="nb">set</span> -g @prefix_highlight_copy_mode_attr <span class="s1">&#39;fg=white,bg=blue&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmux-plugins-tmux-sensible">tmux-plugins/tmux-sensible</h3>
+<p>这个插件进行了一些比较方便的设置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> -g @plugin <span class="s1">&#39;tmux-plugins/tmux-sensible&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>具体还是请看github中的README</p>
+<h2 id="常用快捷键">常用快捷键</h2>
+<p>纯属为自己备份记忆使用，感谢原作者 <a href="https://gist.github.com/ryerh/14b7c24dfd623ef8edc7">https://gist.github.com/ryerh/14b7c24dfd623ef8edc7</a>，当然后期在使用过程中我也会加入自己的东西</p>
+<h3 id="会话相关">会话相关</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 启动新的会话</span>
+tmux <span class="o">[</span>new -s 会话名 -n 窗口名<span class="o">]</span>
+
+<span class="c1"># 恢复会话</span>
+tmux at <span class="o">[</span>-t 会话名<span class="o">]</span>
+
+<span class="c1"># 列出所有的会话</span>
+tmux ls
+
+<span class="c1"># 关闭会话</span>
+tmux kill-session -t 会话名
+
+<span class="c1"># 关闭所有会话</span>
+tmux ls <span class="p">|</span> grep : <span class="p">|</span> cut -d. -f1 <span class="p">|</span> awk <span class="s1">&#39;{print substr($1, 0, length($1)-1)}&#39;</span> <span class="p">|</span> xargs <span class="nb">kill</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="tmux中的操作-需要使用前缀">Tmux中的操作，需要使用前缀</h3>
+<h3 id="会话">会话</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">:new&lt;回车&gt; <span class="c1"># 启动新会话</span>
+s <span class="c1"># 列出所有会话</span>
+$ <span class="c1"># 重命名当前会话</span>
+r <span class="c1"># 强制重载当前会话</span>
+<span class="o">[</span> <span class="c1"># 进入复制模式</span>
+<span class="o">]</span> <span class="c1"># 粘贴复制模式中复制的文本</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="窗口-标签页">窗口（标签页）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">c   <span class="c1"># 创建新窗口</span>
+w   <span class="c1"># 列出所有窗口</span>
+n   <span class="c1"># 切换后一个窗口</span>
+p   <span class="c1"># 切换前一个窗口</span>
+f   <span class="c1"># 查找窗口</span>
+,   <span class="c1"># 重命名当前窗口</span>
+<span class="p">&amp;</span>   <span class="c1"># 关闭当前窗口</span>
+.   <span class="c1"># 修改当前窗口编号</span>
+0-9 <span class="c1"># 切换到制定窗口</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="窗口-排序">窗口（排序）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">swap-window -s <span class="m">3</span> -t <span class="m">1</span>  <span class="c1"># 交换3和1窗口</span>
+swap-window -t <span class="m">1</span>       <span class="c1"># 交换当前窗口和1号窗口</span>
+move-window -t <span class="m">1</span>       <span class="c1"># 移动当前窗口到1号，依次向后排</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="窗格-分割">窗格（分割）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">%          <span class="c1"># 垂直分割</span>
+“          <span class="c1"># 水平分割</span>
+o          <span class="c1"># 交换窗格</span>
+x          <span class="c1"># 关闭窗格</span>
+&lt;SPC&gt;      <span class="c1"># 切换布局</span>
+q          <span class="c1"># 显示窗格编号</span>
+<span class="o">{</span>          <span class="c1"># 与上一个窗格交换位置</span>
+<span class="o">}</span>          <span class="c1"># 与下一个窗格交换位置</span>
+z          <span class="c1"># 切换窗格最大化</span>
+!          <span class="c1"># 将当前的面板移动到新的窗口打开</span>
+ALT+方向键  <span class="c1"># 以5个单元格为单位调整面板边缘</span>
+CTRL+方向键 <span class="c1"># 以1个单元格为单位调整面板边缘</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="同步窗口">同步窗口</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 所有窗格会同步执行命令</span>
+:setw synchronize-panes
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="其他">其他</h3>
+<p>通过 PREFIX-[ 进入文本复制模式，也可以通过下面的配置使用vi模式（可以使用h,j,k,l进行移动）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">setw -g mode-keys vi
+</code></pre></td></tr></table>
+</div>
+</div><p>通过 PREFIX-] 粘贴文本</p>
+<p>杂项</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">~ <span class="c1"># 列出提示信息缓存</span>
+d <span class="c1"># 退出tmux（tmux仍在后台运行）</span>
+? <span class="c1"># 显示所有快捷键</span>
+t <span class="c1"># 会显示一个电子时钟</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">离线鱼</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2021-01-28
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/use_calibreweb_to_manage_books/">
+            <span class="next-text nav-default">使用Calibre-Web管理你的图书</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="blognul/blognul.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/blognul" class="iconfont icon-github" title="github"></a>
+  <a href="https://blognul.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>离线鱼</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
